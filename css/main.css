@@ -56,7 +56,8 @@ p {
 .container {
   box-sizing: border-box;
   width: 90%;
-  max-width: 400px;
+  max-width: 640px;
+  max-height: 1135px;
   background: white;
   padding: 30px 15px;
   margin: 0 auto;
