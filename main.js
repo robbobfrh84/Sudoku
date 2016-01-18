@@ -6,37 +6,36 @@ var block = "<td class='blocks'>"; var block2 = "<td class='blocks2'>";
 var blank = "<td contenteditable='true' class='blocks'>"; var blank2 = "<td contenteditable='true' class='blocks2'>";
 var closetd = "</td>"
 
-document.write("<h2>SoFuckDo</h2>");
+document.write("<h2>Easy - Medium - Hard (Buttons go here) </h2>");
 
-for (var row = 1; row <= 9; row++ ){
-  if (row > 3 && row < 7) {cell=block2;cell2=block;}else{cell=block;cell2=block2;}
-  if (row > 3 && row < 7) {bcell=blank2;bcell2=blank;}else{bcell=blank;bcell2=blank2;}
-  document.write("<table>");
-  for (var column = 1; column <= 9; column++) {
+function startPuzzel(){
+  for (var row = 1; row <= 9; row++ ){
+    if (row > 3 && row < 7) {cell=block2;cell2=block;}else{cell=block;cell2=block2;}
+    if (row > 3 && row < 7) {bcell=blank2;bcell2=blank;}else{bcell=blank;bcell2=blank2;}
+    document.write("<table>");
+    for (var column = 1; column <= 9; column++) {
 
-    if (column > 3 && column < 7) {
-      if (rowNumsSet[blockz] === " ") {
-        document.write(bcell2+closetd);
+      if (column > 3 && column < 7) {
+        if (rowNumsSet[blockz] === " ") {
+          document.write(bcell2+closetd);
+        } else {
+          document.write(cell2+rowNumsSet[blockz]+closetd);
+        }
       } else {
-        document.write(cell2+rowNumsSet[blockz]+closetd);
+        if (rowNumsSet[blockz] === " ") {
+          document.write(bcell+closetd);
+        } else {
+          document.write(cell+rowNumsSet[blockz]+closetd);
+        }
       }
-    } else {
-      if (rowNumsSet[blockz] === " ") {
-        document.write(bcell+closetd);
-      } else {
-        document.write(cell+rowNumsSet[blockz]+closetd);
-      }
+    blockz += 1;
     }
-  blockz += 1;
+    document.write("</table>");
   }
-  document.write("</table>");
-}
 
 /*
-
 blockz = 0;
 document.write("<h1>Answer</h1>");
-
 for (var row = 1; row <= 9; row++ ){
   if (row > 3 && row < 7) {cell=block2;cell2=block;}else{cell=block;cell2=block2;}
   document.write("<table>");
@@ -47,11 +46,9 @@ for (var row = 1; row <= 9; row++ ){
   }
   document.write("</table>");
 }
-
-
 /* Notes and cuts
-
 var x = Math.floor(Math.random() * 100) ;
 if (x < 10){ var y = "0" + x; } else { var y = x; }
-
 */
+}
+startPuzzel();
