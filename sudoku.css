@@ -91,6 +91,11 @@ button {
   margin-bottom: -20px;
 }
 
+.timerz{
+  color: gold;
+  text-shadow: rgba(0,0,0,1) 0px 0px 20px;
+}
+
 footer{
   margin-top: 50px;
 }
