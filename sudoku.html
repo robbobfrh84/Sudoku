@@ -6,8 +6,11 @@
   <link rel="backsand" href="sand-texture.jpg"/>
   <link rel="stylesheet" href="sudoku.css"/>
 </head>
-<body>
+<body id="mainBody">
   <h1>Sudoku</h1>
+  <div class="topDivClass" id="topDiv">
+    <button class="newGameButton" onclick = "menuSwapBack()">Start a New Game</button>
+  </div>
   <div class="buttonPanel" id="bp">
     <button onclick="easyButton()">Easy</button>
     <!-- the reason is missing is just to show how we can place with javascript -->
@@ -17,6 +20,7 @@
   <div class="blockTable" id="blkT">
     <div class="blockHolder" id="blkH"></div>
   </div>
+
 </body>
 <footer>
   - created by Early Boone -

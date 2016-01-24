@@ -3,7 +3,7 @@
 var newButton = document.createElement("button");
 newButton.onclick = function(){
   blockString = mediumPuzzle; key = mKey;
-  build(blockString); menuSwap();
+  build(blockString); menuSwap(); gameTimerPlace();
   return key, blockString;
 }
 newButton.appendChild(document.createTextNode("Medium"));
@@ -35,6 +35,7 @@ function blankBuild(){
     blkH.appendChild(blankBlock);
   }
 }
+blankBuild();
 
 function build(blockString){ //places puzzle number blocks and editable
   for (var i = 0; i < 81; i++){
@@ -74,51 +75,57 @@ function checkCorrect(){
     }
   }
   if (complete === true) {
-    console.log("YOU WIN");
     for (var i = 0; i < 81; i++){
       if (blockString[i] === ' '){
         document.getElementById('blk'+i).style.color = "gold";
         document.getElementById('blk'+i).setAttribute("contentEditable", false);
       }
     }
-    var congrats = document.createElement("div");
-    congrats.appendChild(document.createTextNode("Puzzle Conquered!"));
+    var congrats = document.createElement("p");
+    var minutes = parseInt(seconds/60); seconds -= (minutes*60);
+    if (seconds < 10) {
+      seconds = "0"+seconds.toString()
+    }
+    congrats.innerHTML = "Puzzle Conquered!<br>"+minutes+" min   "+seconds+" sec";
     congrats.className = "announcement";
+
+    bp.removeChild(bp.children[1]);
     bp.appendChild(congrats);
   }
 }
 
 function easyButton(){
-  blockString = easyPuzzle; key = eKey; time = 0;
+  blockString = easyPuzzle; key = eKey;
   build(blockString); menuSwap(); gameTimerPlace();
   return key, blockString;
 }
 function mediumButton(){
   blockString = mediumPuzzle; key = mKey;
-  build(blockString); menuSwap(); gameTimer();
+  build(blockString); menuSwap(); gameTimerPlace();
   return key, blockString;
 }
 function hardButton(){
   blockString = hardPuzzle;key = hKey;
-  build(blockString); menuSwap(); gameTimer();
+  build(blockString); menuSwap(); gameTimerPlace();
   return key, blockString;
 }
 function xHardButton(){
   blockString = xHardPuzzle; key = xKey;
-  build(blockString); menuSwap(); gameTimer();
+  build(blockString); menuSwap(); gameTimerPlace();
   return key, blockString;
 }
 
 function menuSwap(){
-  while (bp.hasChildNodes()){
-    bp.removeChild(bp.lastChild);
-  }
-  var newGame = document.createElement("button");
-  newGame.appendChild(document.createTextNode("Start a New Game"));
-  bp.appendChild(newGame);
-  newGame.onclick = function(){
-    menuSwapBack();
-  }
+  topDiv.style.display = "block";
+  bp.style.display = "none";
+  // var newGame = document.createElement("button");
+  // newGame.innerHTML = "Start a New Game";
+  // newGame.className = "newGameButton";
+  // topDiv.style.height = "50px";
+  // topDiv.appendChild(newGame);
+  // newGame.onclick = function(){
+  //   menuSwapBack();
+  // }
 }
 
 function menuSwapBack() {
@@ -127,50 +134,44 @@ function menuSwapBack() {
       blkH.removeChild(blkH.lastChild);
     }
     blankBuild();
-    while (bp.hasChildNodes()){
-      bp.removeChild(bp.lastChild);
-    }
-    var buttNames = ['Easy', 'Medium','Hard','X-Hard']
-    for (var i = 0; i < 4; i++){
-      var newGame = {}
-      newGame[i] = document.createElement("button");
-      newGame[i].appendChild(document.createTextNode(buttNames[i]));
-      if (i==0){newGame[i].setAttribute("onclick", "easyButton()");}
-      if (i==1){newGame[i].setAttribute("onclick", "mediumButton()");}
-      if (i==2){newGame[i].setAttribute("onclick", "hardButton()");}
-      if (i==3){newGame[i].setAttribute("onclick", "xHardButton()");}
-      bp.appendChild(newGame[i]);
-    }
+    // while (bp.hasChildNodes()){
+    //   bp.removeChild(bp.lastChild);
+    // }
+    topDiv.style.display = "none";
+
+    bp.style.display = "block";
+    // var buttNames = ['Easy', 'Medium','Hard','X-Hard']
+    // for (var i = 0; i < 4; i++){
+    //   var newGame = {}
+    //   newGame[i] = document.createElement("button");
+    //   newGame[i].appendChild(document.createTextNode(buttNames[i]));
+    //   if (i==0){newGame[i].setAttribute("onclick", "easyButton()");}
+    //   if (i==1){newGame[i].setAttribute("onclick", "mediumButton()");}
+    //   if (i==2){newGame[i].setAttribute("onclick", "hardButton()");}
+    //   if (i==3){newGame[i].setAttribute("onclick", "xHardButton()");}
+    //   bp.appendChild(newGame[i]);
+    // }
   }
 }
 
 //create the function that sets the timer.
-var seconds = 0;
-var interval = setInterval(function() {
-    gameTimer();
-}, 1000);
+var interval; // this var interval needs to be created before function and not in funtion. matters, don't know why.
+function resetInterval(){
+  var seconds = 0;
+  clearInterval(interval);
+  interval = setInterval(function() { gameTimer(); }, 1000);
+}
 
+function gameTimer(){
+  document.getElementById('timer_div').innerHTML = ++seconds+" sec";
+}
 
 function gameTimerPlace(){
-  // stopTimer()
+  resetInterval();
+  seconds = 0;
   var timer = document.createElement("div");
   timer.className = "announcement timer";
   timer.id = "timer_div";
   timer.appendChild(document.createTextNode("0 sec"));
-  bp.appendChild(timer);
-
+  topDiv.appendChild(timer);
 }
-
-function gameTimer(){
-
-  console.log(seconds);
-  document.getElementById('timer_div').innerHTML = ++seconds+" sec";
-}
-
-function stopTimer(){
-  clearInterval(interval);
-}
-
-
-
-blankBuild();

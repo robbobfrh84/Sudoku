@@ -22,15 +22,6 @@ h1 {
   margin-top: 2%;
 }
 
-.buttonPanel {
-  background-color: firebrick;
-  margin: auto;
-  padding: 2% 0;
-  border-bottom: 7px solid #384047;
-  border-radius: 5px;
-  box-shadow: 0 0 2px black;
-}
-
 button {
   color: black; font-size: 1.5em; font-family: fantasy;
   box-shadow: 0 0 3px black inset, 0 0 10px black;
@@ -39,6 +30,35 @@ button {
   border: none;
   margin: 0 2%;
   border-radius: 5px;
+}
+
+.topDivClass {
+  width: 400px; height: 50px;
+  margin: auto;
+  display: none;
+
+}
+
+.newGameButton {
+  font-size: 1em;
+  float: left;
+  margin-top: 15px;
+  margin-left: -5px;
+}
+
+.timer {
+  margin-top: 0px;
+  float: right;
+}
+
+
+.buttonPanel {
+  background-color: firebrick;
+  margin: auto;
+  padding: 2% 0;
+  border-bottom: 7px solid #384047;
+  border-radius: 5px;
+  box-shadow: 0 0 2px black;
 }
 
 .blockTable {
@@ -75,17 +95,7 @@ footer{
   margin-top: 50px;
 }
 
-.timer {
-  float:right;
-  margin-top: 0px;
-  width: 200px;
-
-}
-
-
 /* Notes on CSS practice
-
-
 - remove warning on new game after completion
 - add time.
 - dropdown congrats W/ time and convert to easy/m/h/x if all correct.
