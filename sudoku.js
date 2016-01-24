@@ -9,27 +9,29 @@ newButton.onclick = function(){
 newButton.appendChild(document.createTextNode("Medium"));
 bp.insertBefore(newButton, bp.children[1]);
 
-var easyPuzzle = "5793 1684 4 9782512  4 673  652 3978 3   54   9268 51382 514 96  6 32147 147    5".split('');
-//var easyPuzzle = "57 321684643 78251281456739165243978738195462492687513827514396956832147314769825".split('');
+//var easyPuzzle = "5793 1684 4 9782512  4 673  652 3978 3   54   9268 51382 514 96  6 32147 147    5".split('');
+var easyPuzzle = "57932 684643978 512814567 91652 397873819 4 2492687513827514396956832147314769825".split('');
 var mediumPuzzle = "3948 251775 149 3   83  964    3 87 8256713494  9 8   5   8 4  18749  2 649215   ".split('');
 var hardPuzzle = "4562  3 7  14   599 21 5  4  46 7598598  2 716   984 3  39    216 82       73194 ".split('');
 var xHardPuzzle = "        13 1      7 5 4  6 13  67    5 3 4      8 5   5 3 8  128             3 8 ".split('');
 var eKey = "579321684643978251281456739165243978738195462492687513827514396956832147314769825".split('');
-var mKey;
-var hKey;
-var xKey;
+var mKey = "394862517756149238218357964961534872825671349473928156532786491187493625649215783".split('');
+var hKey = "456289317871463259932175864324617598598342671617598423743956182169824735285731946".split('');
+var xKey = "986732541341659278725148369134967825258314697697825134573486912869271453412593786".split('');
 var color1 = "cornflowerblue";
 var color2 = "darkseagreen";
 var color1Code = "3 4 5 12 13 14 21 22 23 27 28 29 36 37 38 45 46 47 33 34 35 42 43 44 51 52 53 57 58 59 66 67 68 75 76 77".split(' ');
 
 // This function builds the Sudoku grid with empty blocks...
-function blankBuild(blockString){
+function blankBuild(){
   for (var i = 0; i < 81; i++){
-    if (color1Code.includes(i.toString())) {color = color2;} else {color=color1;}
+    if (color1Code.includes(i.toString()))
+     {color = color2;} else {color=color1;}
     var blankBlock = document.createElement("div")
     blankBlock.setAttribute("contentEditable", true);
     blankBlock.style.backgroundColor = color;
-    blankBlock.id = ("blk"+i); blankBlock.className = 'blocks';
+    blankBlock.id = ("blk"+i);
+    blankBlock.className = 'blocks';
     blkH.appendChild(blankBlock);
   }
 }
@@ -37,17 +39,17 @@ function blankBuild(blockString){
 function build(blockString){ //places puzzle number blocks and editable
   for (var i = 0; i < 81; i++){
     document.getElementById("blk"+i).innerHTML = (blockString[i]);
-    var loopBlock = document.getElementById("blk"+i);
     if (document.getElementById("blk"+i).innerHTML !== ' ') {
-      loopBlock.setAttribute("contentEditable", false);
+      document.getElementById("blk"+i).setAttribute("contentEditable", false);
     } else {
-      loopBlock.setAttribute("contentEditable", true);
-      loopBlock.setAttribute("onkeypress", 'checkInput(event,this)');
+      document.getElementById("blk"+i).setAttribute("contentEditable", true);
+      document.getElementById("blk"+i).setAttribute("onkeypress", 'checkInput(event,this)');
     }
   }
 }
 
 function checkInput(evt, x) {
+  console.log(x);
   var num = parseInt(evt.keyCode);
   event.preventDefault();
   if(num >= 49 && num <= 57){
@@ -87,8 +89,8 @@ function checkCorrect(){
 }
 
 function easyButton(){
-  blockString = easyPuzzle; key = eKey; var killTime = true;
-  build(blockString); menuSwap(); gameTimer(killTime);
+  blockString = easyPuzzle; key = eKey; time = 0;
+  build(blockString); menuSwap(); gameTimerPlace();
   return key, blockString;
 }
 function mediumButton(){
@@ -143,24 +145,32 @@ function menuSwapBack() {
 }
 
 //create the function that sets the timer.
+var seconds = 0;
+var interval = setInterval(function() {
+    gameTimer();
+}, 1000);
 
-function gameTimer(killTime){
+
+function gameTimerPlace(){
+  // stopTimer()
   var timer = document.createElement("div");
   timer.className = "announcement timer";
   timer.id = "timer_div";
-  var time = 0;
   timer.appendChild(document.createTextNode("0 sec"));
   bp.appendChild(timer);
-  var interval = setInterval(function(killTime) {
-      document.getElementById('timer_div').innerHTML = ++time+" sec";
-      if (killTime){
-        // document.getElementById('timer_div').innerHTML = ++time+"x";
-        // console.log(time, killTime)
-        time = 0;
-        killTime = false;
-      }
-  }, 1000);
+
 }
+
+function gameTimer(){
+
+  console.log(seconds);
+  document.getElementById('timer_div').innerHTML = ++seconds+" sec";
+}
+
+function stopTimer(){
+  clearInterval(interval);
+}
+
 
 
 blankBuild();
