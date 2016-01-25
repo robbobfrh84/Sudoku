@@ -1,15 +1,24 @@
-// This is just and example of how we can create and place a new button
-// ...into a specific location even with a function using javascript.
-var newButton = document.createElement("button");
-newButton.onclick = function(){
-  blockString = mediumPuzzle; key = mKey;
-  build(blockString); menuSwap(); gameTimerPlace();
-  return key, blockString;
+var fileDisplayArea = document.getElementById("sFooter");
+function readTextFile(file)
+{
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                fileDisplayArea.innerText = allText
+            }
+        }
+    }
+    rawFile.send(null);
 }
-newButton.appendChild(document.createTextNode("Medium"));
-bp.insertBefore(newButton, bp.children[1]);
 
-//var easyPuzzle = "5793 1684 4 9782512  4 673  652 3978 3   54   9268 51382 514 96  6 32147 147    5".split('');
+readTextFile("SudokuPuzzelsAndAnswers.txt");
+
 var easyPuzzle = "57932 684643978251281456739165243978738195462492687513827514396956832147314769825".split('');
 var mediumPuzzle = "3948 251775 149 3   83  964    3 87 8256713494  9 8   5   8 4  18749  2 649215   ".split('');
 var hardPuzzle = "4562  3 7  14   599 21 5  4  46 7598598  2 716   984 3  39    216 82       73194 ".split('');

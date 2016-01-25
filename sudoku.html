@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
   <title>SUDOKU</title>
   <link rel="tab sukoku icon" href="sudoku_icon.png"/>
   <link rel="backsand" href="sand-texture.jpg"/>
@@ -13,27 +14,16 @@
   </div>
   <div class="buttonPanel" id="bp">
     <button onclick="easyButton()">Easy</button>
-    <!-- the reason is missing is just to show how we can place with javascript -->
+    <button onclick="mediumButton()">Medium</button>
     <button onclick="hardButton()">Hard</button>
     <button onclick="xHardButton()">X-Hard</button>
   </div>
   <div class="blockTable" id="blkT">
     <div class="blockHolder" id="blkH"></div>
   </div>
-
 </body>
-<footer>
+<footer id="sFooter">
   - created by Early Boone -
 </footer>
 <script src="sudoku.js"></script>
 </html>
-
-<!-- Notes on html
- - head never goes into css, HEADER DOES
-<title> goes in the tab.
-
-
-
-
-
--->
