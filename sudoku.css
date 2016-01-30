@@ -1,14 +1,11 @@
-* {
-  margin: 0;
-  padding: 0;
-}
 html {
+  background-image: url("sand-texture.jpg");
   box-shadow: 0 0 25px black inset;
-  height: 100%;
+  background-repeat: no-repeat;
+
 }
 
 body {
-  background-image: url("sand-texture.jpg");
   font-family: fantasy;
   text-align: center;
   min-width: 320px; max-width: 650px;
@@ -19,6 +16,7 @@ h1 {
   font-size: 2.5em;
   text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
   color: firebrick;
+  margin: auto;
   margin-top: 2%;
 }
 
@@ -96,27 +94,23 @@ button {
   text-shadow: rgba(0,0,0,1) 0px 0px 20px;
 }
 
-footer{
+#sFooter{
+  font-size: 1em;
   margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.pa {
+  display: none;
 }
 
 /* Notes on CSS practice
-- remove warning on new game after completion
-- add time.
-- dropdown congrats W/ time and convert to easy/m/h/x if all correct.
-- add random from list.
+
 - fix the blankbuild issues of being able to type a bunch in each blocks
   - ... by doing contentedit false n just putting a ' ' space in.
-- create a blank button pannel row with start new game and time on TOP
-CSS---
-- start a new game should be less intrusive
-- set orginal number back. so they sort of look like set in stone.
+
 - create darken hover effect on buttons
-- stylyize transparent background courner/fade
-- seathemed color scheme for like cloud blue! or something sea green like.
-- equal center for buttons
-- transfer to sudoku file on atom/cleanup update github
-- test width breakdowns on phone
+- swap to mobile first by setting origial max width to 400 then changing on likr 500+...
 - open text file for games.
 - add a fancy italic "start new game... " in left courner
   - OR: put "select level to start new game in the actual sudoku text!"
